@@ -1,10 +1,16 @@
 import pickle
 
+from src.console_outputs import ShowNoteConsoleOutput
+
 
 class Note:
-    def __init__(self, note_text):
+    def __init__(self, note_id:int, note_text):
         self.note_text = note_text
         self.note_tags = set()
+        self.note_id = note_id
+
+    def get_info(self):
+        return ShowNoteConsoleOutput(self).render()
 
 
 class Notes:
@@ -15,15 +21,15 @@ class Notes:
         self.load_notes_from_file()
 
     def add_note(self, note_text):
-        self.notes[self.notes_iter] = Note(note_text)
+        self.notes[self.notes_iter] = Note(self.notes_iter, note_text)
         self.notes_iter += 1
 
     def delete_note(self, note_id):
         self.notes.pop(note_id)
 
     def get_notes(self):
-        for key, value in self.notes.items():
-            yield key, value
+        for value in self.notes.values():
+            yield value
 
     def add_tags(self, note_id, tags):
         for tag in tags:

@@ -1,18 +1,9 @@
 from notes import user_notes
 from notes_decorator import input_error
-
-
-def print_note(key, value):
-    result = 20 * "-" + "\n"
-    result += f"note id - {key}\n"
-    result += f"note text - {value.note_text}\n"
-    if value.note_tags:
-        result += f"tags - {' '.join(sorted(tag for tag in value.note_tags))}\n"
-    return result
+from console_outputs import ShowNotesConsoleOutput
 
 @input_error
 def add_note(data):
-
     note_text = data
     user_notes.add_note(note_text)
     return "New note added"
@@ -20,10 +11,7 @@ def add_note(data):
 
 @input_error
 def show_notes():
-    result = ""
-    for key, value in user_notes.get_notes():
-        result += print_note(key, value)
-    return result
+    return ShowNotesConsoleOutput(user_notes).render()
 
 
 @input_error
@@ -57,8 +45,8 @@ def edit_note(data: str) -> str:
 @input_error
 def search_notes(data):
     result = ""
-    for key, value in user_notes.search_notes(data).items():
-        result += print_note(key, value)
+    for note in user_notes.search_notes(data).values():
+        result += note.get_info()
     return result
 
 
@@ -85,6 +73,6 @@ def search_notes_by_tags(data):
 
 def sort_notes() -> str:
     result = ""
-    for key, value in user_notes.sort_notes().items():
-        result += print_note(key, value)
+    for note in user_notes.sort_notes().values():
+        result += note.get_info()
     return result

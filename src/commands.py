@@ -1,6 +1,7 @@
 from classes import address_book, Record
 from decorator import input_error
 from sort_files import run_sorting
+from src.console_outputs import ShowAllContactsConsoleOutput
 
 
 def get_help():
@@ -94,17 +95,7 @@ def search_function(value):
 
 @input_error
 def show_function():
-    contacts = ''
-    page_number = 1
-
-    for page in address_book.iterator():
-        contacts += f'Page №{page_number}\n'
-
-        for record in page:
-            contacts += f'{record.get_info()}\n'
-            page_number += 1
-
-    return contacts
+    return ShowAllContactsConsoleOutput(address_book).render()
 
 
 @input_error
