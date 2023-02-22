@@ -1,6 +1,6 @@
 import pickle
 
-from src.console_outputs import ShowNoteConsoleOutput
+from console_outputs import ShowNoteConsoleOutput
 
 
 class Note:

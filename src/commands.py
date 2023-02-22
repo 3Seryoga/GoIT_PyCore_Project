@@ -1,7 +1,7 @@
 from classes import address_book, Record
 from decorator import input_error
 from sort_files import run_sorting
-from src.console_outputs import ShowAllContactsConsoleOutput
+from console_outputs import ShowAllContactsConsoleOutput
 
 
 def get_help():

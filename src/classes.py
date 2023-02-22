@@ -3,7 +3,7 @@ import re
 from collections import UserDict
 from datetime import datetime
 
-from src.console_outputs import GetInfoConsoleOutput
+from console_outputs import GetInfoConsoleOutput
 
 
 class Field:
